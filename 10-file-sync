@@ -1,0 +1,9 @@
+//require('./7-mind-granade');
+
+const {readFileSync, writeFileSync} = require('fs');
+
+const firstFile = readFileSync('./test/subfolder/text.txt', 'utf8')
+
+console.log(firstFile);
+
+writeFileSync('./test/subfolder/text1.txt',' There you go', {flag : 'a'})
