@@ -1,7 +1,14 @@
-const _ = require('lodash') // utility library
+const http = require('http')
+const {readFileSync, createReadStream} = require('fs')
 
-const items = [1,[2,[3,[4]]]]
+const server = http.createServer((req,res)=>{
+    // const text = readFileSync('./test/subfolder/fourth.txt', 'utf8')
+    // res.end(text)
+    // stream example
+    const stream = createReadStream('./test/subfolder/fourth.txt', 'utf8')
+    stream.on('open',()=>{
+        stream.pipe(res)
+    })
+})
 
-const newItems = _.flattenDeep(items)
-
-console.log(newItems);
+server.listen(3000)

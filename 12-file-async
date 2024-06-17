@@ -1,0 +1,61 @@
+const { readFile, writeFile } = require('fs');
+//const {readFile,writeFile} = require('fs').promises
+
+const util = require('util')
+const readFilePromise = util.promisify(readFile)
+const writeFilePromise = util.promisify(writeFile)
+
+const start = async () => {
+    try {
+        const first = await readFilePromise('./test/subfolder/text.txt', 'utf-8')
+        const second = await readFilePromise('./test/subfolder/text1.txt', 'utf-8')
+        await writeFilePromise('./test/subfolder/third.txt', 'You are awsome............')
+        console.log(first, second);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// const start = async () => {
+//     try {
+//         const first = await readFile('./test/subfolder/text.txt', 'utf-8')
+//         const second = await readFile('./test/subfolder/text1.txt', 'utf-8')
+//         await writeFile('./test/subfolder/third.txt', 'You are awsome')
+//         console.log(first, second);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+//sync or blocking code
+// readFile('./test/subfolder/text1.txt', 'utf-8', (err, data) => {
+//     if (err)
+//         console.log(err);
+//     else
+//         console.log(data);
+// })
+
+//using promise
+// const getText = (path) => {
+//     return new Promise((resolve, reject) => {
+//         readFile(path, 'utf-8', (err, data) => {
+//             if (err)
+//                 reject(err)
+//             else
+//                 resolve(data)
+//         })
+//     })
+// }
+//getText('./test/subfolder/text.txt').then((result) => (console.log(result))).catch((err) => console.log(err))
+
+//calling thru async code
+// const start = async () => {
+//     try {
+//         const first = await getText('./test/subfolder/text.txt')
+//         const second = await getText('./test/subfolder/text1.txt')
+//         console.log(first, second);
+//     } catch (error) {
+//         console.log(eror);
+//     }
+// }
+start()
